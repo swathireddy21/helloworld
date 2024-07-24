@@ -1,0 +1,35 @@
+pipeline:
+  name: helloworld
+  identifier: helloworld
+  projectIdentifier: harnesssample
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: hello
+        repoName: helloworld
+        build: <+input>
+  stages:
+    - stage:
+        name: build test and push
+        identifier: build_test_and_push
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: run unit tests
+                  identifier: run_unit_tests
+                  spec:
+                    shell: Sh
+                    command: echo "Hello world"
